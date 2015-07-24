@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         options: {
           engine: 'im',
           sizes: [{
-            width: 100,
+            width: 73.333,  //360*270
             suffix: '_small',
             quality: 100
           }]
@@ -22,8 +22,8 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           src: ['*.{gif,jpg,png}'],
-          cwd: 'images/',
-          dest: 'images_final/'
+          cwd: 'img_pizza/',
+          dest: 'images_pizza_2/'
         }]
       }
     },
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
     /* Clear out the images directory if it exists */
     clean: {
       dev: {
-        src: ['images_final'],
+        src: ['images_pizza_2'],
       },
     },
 
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
     mkdir: {
       dev: {
         options: {
-          create: ['images_final']
+          create: ['images_pizza_2']
         },
       },
     },
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           src: ['images/fixed/*.{gif,jpg,png}'],
-          dest: 'images_final/',
+          dest: 'images_pizza_2/',
           flatten: true,
         }]
       },

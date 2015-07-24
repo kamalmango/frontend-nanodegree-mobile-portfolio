@@ -497,9 +497,16 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+
+  // new code to avoid forced synchronous layout
+  var newPos = [];
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    newPos.push(items[i].basicLeft + 100 * phase + 'px');
+  }
+
+  for (var i = 0; i < items.length; i++) {
+    items[i].style.left = newPos[i];
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -515,14 +522,18 @@ function updatePositions() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
+
+
+
 // Generates the sliding pizzas when the page loads.
+
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    elem.src = "images/pizza.png"; //"images_pizza_2/pizza-73.333_small.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
