@@ -441,10 +441,10 @@ var resizePizzas = function(size) {
           console.log("bug in sizeSwitcher");
     }
 
-    var randomPizzas = document.querySelectorAll(".randomPizzaContainer"); // to avoid repetition when trying to select randomPizzaContainer, so I could use randomPizza in the for loop without querying the dom everytime
+    var randomPizzas = document.getElementsByClassName("randomPizzaContainer"); // to avoid repetition when trying to select randomPizzaContainer, so I could use randomPizza in the for loop without querying the dom everytime
     // the for loop accesses the geometirc property of the elements and changes their styles
     // making this the source of the foce synchornous layout
-    for (var i = 0; i < randomPizzas.length; i++) {
+    for (var i = 0, len = randomPizzas.length; i < len; i++) {
       // removed unessecary lines of code to make the purpose for this function only set the width of every element to a chosen percentage
       // this avoids query selection inside the for loop and no more conversion between pixels and percentages
       randomPizzas[i].style.width = newWidth + "%";
@@ -463,8 +463,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -496,12 +496,13 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
 
   // new code to avoid forced synchronous layout
   var newPos = [];
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+  var phase;
+  for (var i = 0, len = items.length; i < len; i++) {
+    phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     newPos.push(items[i].basicLeft + 100 * phase + 'px');
   }
 
@@ -530,15 +531,17 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
+  var elem;
+  var movingPizzas = document.getElementById('movingPizzas1');
+  for (var i = 0; i < 48; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png"; //"images_pizza_2/pizza-73.333_small.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
   }
   updatePositions();
 });
