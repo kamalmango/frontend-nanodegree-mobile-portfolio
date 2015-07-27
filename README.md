@@ -71,3 +71,17 @@ Feeling uninspired by the portfolio? Here's a list of cool portfolios I found af
 * <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
 * <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
 * <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+
+
+######### Running the file
+To run the file click on index.html or visit my github page https://github.com/kamalmango/frontend-nanodegree-mobile-portfolio
+
+######### Optimizations made in views/js/main.js
+- used getElementsByClassName instead of querySelectorAll as a query selector becuase it performs faster
+- Updated the changePizzaSizes function to avoid Forced Synchronous Layout by putting the query selection outside of the for loop. Also removed some uneccessary code and repetitions.
+- Put all variable definitions outside of loops
+- Fixed the updatePositions function to avoid forced synchronous layout by saving new positions into an array and creating another loop to style them
+- Put all getElementByID or getElementByClass calls outside of loops to avoid uneccessary queriying of the DOM
+- reduced the amount of sliding pizzas when the page loads to 48 which is a multiple of the cols value to cover the most common screen resolutions
+- saved array lengths as part of condition statements in a local variable so that the array's length property is not accessed to check its value at each iteration
+- 

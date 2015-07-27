@@ -501,8 +501,9 @@ function updatePositions() {
   // new code to avoid forced synchronous layout
   var newPos = [];
   var phase;
+  var top = document.body.scrollTop / 1250;
   for (var i = 0, len = items.length; i < len; i++) {
-    phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    phase = Math.sin(top + i % 5);
     newPos.push(items[i].basicLeft + 100 * phase + 'px');
   }
 
